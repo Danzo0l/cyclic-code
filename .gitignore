@@ -1,0 +1,19 @@
+# IDE
+.vscode
+.idea
+
+# Pytohn enviroment
+venv
+.ipynb_checkpoints
+__pycache__
+*.pyc
+
+
+# C/C++ enviroment
+cmake-build-debug
+
+# Build
+build
+*.exe
+*.out
+*.gch
