@@ -1,3 +1,5 @@
+#include "stdio.h"
+
 long getHighBit_32(long x)
 {
     x |= x >> 1;
@@ -11,20 +13,20 @@ long getHighBit_32(long x)
 long divide_mod_poly_32(const long a, const long b)
 {
 // a mod b
-    long c = b;
-    long d = a;
 
-    while(getHighBit_32(d) > getHighBit_32(c))
+    long c = a;
+
+    while (getHighBit_32(c) >= getHighBit_32(b))
     {
-        c <<= 1;
-        d ^= c;
-
-        if (getHighBit_32(d) < getHighBit_32(b))
+        long d = b;
+        while(getHighBit_32(c) > getHighBit_32(d))
         {
-            break;
+            d <<= 1;
         }
+        c ^= d;
     }
-    return d;
+
+    return c;
 }
 
 char get_poly_deg_32(long g)
