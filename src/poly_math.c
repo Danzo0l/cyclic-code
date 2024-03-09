@@ -8,15 +8,6 @@ long getHighBit_32(long x)
     return x - (x >> 1);
 }
 
-long getBitCount_32(long x)
-{
-    x = (x & 0x55555555) + ((x >> 1) & 0x55555555);
-    x = (x & 0x33333333) + ((x >> 2) & 0x33333333);
-    x = (x & 0x0F0F0F0F) + ((x >> 4) & 0x0F0F0F0F);
-    x = (x & 0x00FF00FF) + ((x >> 8) & 0x00FF00FF);
-    return (x & 0x0000FFFF) + (x >> 16);
-}
-
 long divide_mod_poly_32(const long a, const long b)
 {
 // a mod b
