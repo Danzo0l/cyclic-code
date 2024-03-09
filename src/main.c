@@ -1,41 +1,35 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "coder.h"
 #include "decoder.h"
 
-long G = 0b1101;
-long M = 0b1101;
-
-int main()
-{
-
-//    printf("c = %ld\n", divide_mod_poly_32(M, G));
-
-    long E;
-    long e;
-    printf("[\n");
-
-    for (int i = 0; i < 32; i++)
-    {
-        printf("\t");
-
-        long a = cyclic_coder_32(G, M);
-        printf("{\"m\": %ld, \"a\": %ld, ", M, a);
-        e = i;
-        printf("\"e\": %ld, ", e);
-
-        long b = a^e;
-        printf("\"b\" : %ld, ", b);
-
-        // Testing default decoder
-        long d = cyclic_default_decoder_32(G, a^e, &E);
-        printf("{\"m^\": %ld, \"E\": %ld}, ", d, E);
-
-        // Testing alter decoder
-        long d1 = cyclic_alter_decoder_32(G, a^e, &E);
-        printf("{\"m^\": %ld, \"E\": %ld}", d1, E);
-
-        printf("},\n");
+int main(int argc, char **argv) {
+    if (argc != 4) {
+        printf("Usage: %s <mode> <g> <m>\n", argv[0]);
+        return 1;
     }
-    printf("]\n");
+
+    char *mode = argv[1];
+    long g = strtol(argv[2], NULL, 10);
+    long m = strtol(argv[3], NULL, 10);
+    long E;
+
+    if (strcmp(mode, "-c") == 0) {
+        long a = cyclic_coder_32(g, m);
+        printf("g: %ld, m: %ld, a: %ld \n", g, m, a);
+    } else if (strcmp(mode, "-d") == 0) {
+        // Testing default decoder
+        long d = cyclic_default_decoder_32(g, m, &E);
+        printf("{\"m^\": %ld, \"E\": %ld}, ", d, E);
+    } else if (strcmp(mode, "-a") == 0) {
+        // Testing alter decoder
+        long d1 = cyclic_alter_decoder_32(g, m, &E);
+        printf("\"m^\": %ld, \"E\": %ld", d1, E);
+    } else {
+        printf("Invalid mode\n");
+        return 1;
+    }
+
     return 0;
 }
