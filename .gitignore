@@ -8,7 +8,6 @@ venv
 __pycache__
 *.pyc
 
-
 # C/C++ enviroment
 cmake-build-debug
 

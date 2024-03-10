@@ -17,15 +17,15 @@ int main(int argc, char **argv) {
 
     if (strcmp(mode, "-c") == 0) {
         long a = cyclic_coder_32(g, m);
-        printf("g: %ld, m: %ld, a: %ld \n", g, m, a);
+        printf("%ld, %ld, %ld", g, m, a);
     } else if (strcmp(mode, "-d") == 0) {
         // Testing default decoder
         long d = cyclic_default_decoder_32(g, m, &E);
-        printf("{\"m^\": %ld, \"E\": %ld}, ", d, E);
+        printf("%ld, %ld", d, E);
     } else if (strcmp(mode, "-a") == 0) {
         // Testing alter decoder
         long d1 = cyclic_alter_decoder_32(g, m, &E);
-        printf("\"m^\": %ld, \"E\": %ld", d1, E);
+        printf("%ld, %ld", d1, E);
     } else {
         printf("Invalid mode\n");
         return 1;
