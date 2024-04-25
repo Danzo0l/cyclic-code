@@ -16,3 +16,6 @@ build
 *.exe
 *.out
 *.gch
+
+# Test files
+*.txt
